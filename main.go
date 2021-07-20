@@ -17,11 +17,9 @@ import (
 	category "github.com/gzltommy/category/proto/category"
 )
 
-const consul_host = "192.168.100.64"
-
 func main() {
 	// 配置中心
-	consulConfig, err := common.GetConsulConfig(consul_host, 8500, "/micro/config")
+	consulConfig, err := common.GetConsulConfig(common.Consul_Host, 8500, "/micro/config")
 	if err != nil {
 		panic(err)
 	}
@@ -29,7 +27,7 @@ func main() {
 	// 注册中心
 	consulRegistry := consul.NewRegistry(func(options *registry.Options) {
 		options.Addrs = []string{
-			fmt.Sprintf("%s:%d", consul_host, 8500),
+			fmt.Sprintf("%s:%d", common.Consul_Host, 8500),
 		}
 	})
 
